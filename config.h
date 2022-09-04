@@ -3,40 +3,42 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx       = 2;        /* border pixel of windows */
-static const unsigned int snap           = 32;       /* snap pixel */
-static const unsigned int systraypinning = 0;		 /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
-static const unsigned int systrayspacing = 2;		 /* systray spacing */
-static const int systraypinningfailfirst = 1;		 /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
-static const int showsystray             = 1;		 /* 0 means no systray */
-static const unsigned int gappih         = 10;       /* horiz inner gap between windows */
-static const unsigned int gappiv         = 10;       /* vert inner gap between windows */
-static const unsigned int gappoh         = 10;       /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov         = 10;       /* vert outer gap between windows and screen edge */
-static const int smartgaps               = 1;        /* 1 means no outer gap when there is only one window */
-static const int showbar                 = 1;        /* 0 means no bar */
-static const int topbar                  = 0;        /* 0 means bottom bar */
-static const Bool viewontag              = True;     /* Switch view on tag switch */
-static const char *fonts[]               = { "Fira Code Nerd Font:size=13" };
-static const char dmenufont[]            = "Fira Code Nerd Font:size=13";
-static const char col_gray1[]            = "#222222";
-static const char col_gray2[]            = "#444444";
-static const char col_gray3[]            = "#bbbbbb";
-static const char col_gray4[]            = "#ffffff";
-static const char col_cyan[]             = "#37474F";
-static const char col_border[]           = "#42A5F5";
-static const unsigned int baralpha       = 0xd0;
-static const unsigned int borderalpha    = OPAQUE;
-static const char *colors[][3]           = {		/* workspace diff status color*/
-	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },  
-	[SchemeSel]  = { col_gray4, col_cyan,  col_border  },
-	[SchemeHid]  = { col_cyan,  col_gray1, col_border  },
+static const unsigned int borderpx          = 3; /* 窗口边框大小 */
+static const unsigned int snap              = 32; /* 边缘依附宽度 */
+static const unsigned int systraypinning    = 0; /* 托盘跟随的显示器 0代表不指定 */
+static const unsigned int systrayspacing    = 2; /* 托盘间距 */
+static const int systraypinningfailfirst    = 1; /* 1表示如果ping失败将在第一个显示器上显示托盘 否则在最后一个显示器上显示托盘*/
+static const int showsystray                = 1; /* 是否显示系统托盘 0不显示 1显示 */
+static const unsigned int gappih            = 10; /* 两个窗口水平方向的间距 */
+static const unsigned int gappiv            = 10; /* 窗口间垂直方向的间距 */
+static const unsigned int gappoh            = 10; /* 窗口与屏幕左右边缘的间距 */
+static const unsigned int gappov            = 10; /* 窗口与屏幕上下边缘的间距 */
+static const int smartgaps                  = 1; /* 1表示只有一个窗口时与屏幕边缘没有间距 */
+static const int showbar                    = 1; /* 0不显示状态栏 1显示状态栏 */
+static const int topbar                     = 0; /* 0状态栏显示在底部 1状态栏显示在顶部 */
+static const Bool viewontag                 = True; /* 切换标签开关 */
+static const char* fonts[]                  = { "Fira Code Nerd Font:size=13" }; /* 字体与字号 */
+static const char dmenufont[]               = "Fira Code Nerd Font:size=13"; /*dmenu的字体与字号*/
+static const char col_gray1[]               = "#222222";
+static const char col_gray2[]               = "#444444";
+static const char col_gray3[]               = "#bbbbbb";
+static const char col_gray4[]               = "#ffffff";
+static const char col_cyan[]                = "#37474F";
+static const char col_border[]              = "#42A5F5";
+static const unsigned int baralpha          = 0xd0; /*状态栏透明度*/
+static const unsigned int borderalpha       = OPAQUE; /*边框透明度*/
+static const char* colors[][3] = {
+    /* workspace diff status color*/
+    /*               fg         bg         border   */
+    [SchemeNorm] = { col_gray3, col_gray1, col_gray2  },
+    [SchemeSel]  = { col_gray4, col_cyan,  col_border },
+    [SchemeHid]  = { col_cyan,  col_gray1, col_border },
 };
-static const unsigned int alphas[][3]      = {			/* workspace diff status alpha*/ 
-	/*               fg      bg        border     */
-	[SchemeNorm] = { OPAQUE, baralpha, borderalpha },
-	[SchemeSel]  = { OPAQUE, baralpha, borderalpha },
+static const unsigned int alphas[][3] = {
+    /* workspace diff status alpha*/
+    /*               fg      bg        border     */
+    [SchemeNorm] = { OPAQUE, baralpha, borderalpha },
+    [SchemeSel]  = { OPAQUE, baralpha, borderalpha },
 };
 
 /* tagging */
@@ -48,11 +50,11 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Android Emulator", NULL,       NULL,       0,            1,           -1 },
-	{ "Emulator", NULL,       NULL,       0,            1,           -1 },
-	{ "quemu-system-i386", NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "Gimp",				NULL,       NULL,       0,            1,           -1 },
+	{ "Android Emulator",	NULL,       NULL,       0,            1,           -1 },
+	{ "Emulator",			NULL,       NULL,       0,            1,           -1 },
+	{ "quemu-system-i386",	NULL,       NULL,       0,            1,           -1 },
+	{ "Firefox",			NULL,       NULL,       1 << 8,       0,           -1 },
 };
 
 /* layout(s) */
@@ -91,9 +93,10 @@ static const char *mutevol[]       = { "/home/pujic/scripts/vol-toggle.sh",  NUL
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "80x24", NULL };
 
-static const char *screenshotcmd[] = { "flameshot", "gui", NULL };
+static const char* screenshotcmd[] = { "flameshot", "gui", NULL };
 
-static const char *rofilanchcmd[] = { "rofi", "-show", "drun", NULL };
+static const char* rofilanchcmd[] = { "rofi", "-show", "drun", NULL };
+static const char* rofilanchruncmd[] = { "rofi", "-show", "run", NULL };
 
 static Key keys[] = {
 	/* modifier            key                      function        argument */
@@ -165,4 +168,3 @@ static Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
-
